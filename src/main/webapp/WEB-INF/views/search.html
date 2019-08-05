@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>Search product</title>
+</head>
+<body>
+<h2>Search product</h2>
+<p>
+    <a th:href="@{/products/list}">Back to product list</a>
+</p>
+<div class="notify">
+    <!--/*@thymesVar id="success" type="com"*/-->
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<hr>
+<table id="products">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Producer</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${products}">
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getPrice()}"></td>
+        <td th:text="${row.getDescription()}"></td>
+        <td th:text="${row.getProducer()}"></td>
+        <td><a th:href="@{/products/{id}/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/products/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/products/{id}/view(id=${row.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
